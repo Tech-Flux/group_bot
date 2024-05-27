@@ -15,3 +15,5 @@
 1. Clone the repository:
    ```sh
    git clone https://github.com/x-poison/group_bot.git
+
+   cd group_bot
