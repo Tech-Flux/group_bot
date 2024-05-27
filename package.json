@@ -4,6 +4,7 @@
   "description": "Telegram-Group-Bot",
   "main": "index.js",
   "scripts": {
+    "start": "node start.js",
     "test": "npm start"
   },
   "keywords": [
