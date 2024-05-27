@@ -15,5 +15,18 @@
 1. Clone the repository:
    ```sh
    git clone https://github.com/x-poison/group_bot.git
-
+   ```
+   ```sh
    cd group_bot
+   ```
+   ```sh
+   pip install requirements.txt
+   npm install
+   ```
+   ```sh
+   BOT_TOKEN = 
+   DATABASE_URI = 
+   OWNER_ID =
+   ```
+
+
