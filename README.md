@@ -1,4 +1,4 @@
-# Project Name
+# Group Management Bot
 
 ## Description
 [Include a brief description of your project]
