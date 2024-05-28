@@ -200,6 +200,9 @@ def handle_move(message: Message):
 def handle_exit(message: Message):
     exit_game(message)
 
-bot.polling()
 # Start the bot
-
+try:
+    bot.polling()
+except Exception as e:
+    sys.stderr.write(f"An error occurred: {e}\n")
+    sys.exit(1)
