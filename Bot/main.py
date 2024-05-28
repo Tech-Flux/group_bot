@@ -6,14 +6,15 @@ from pymongo import MongoClient
 import telebot
 from telebot.types import Message
 from dotenv import load_dotenv
-from groups.warns import handle_warn_command, handle_warns_command, handle_remove_warning
+from groups.pin import pin, unpin
 from groups.admin import handle_promote, handle_demote
 from groups.kick import handle_kick
 from groups.add import handle_add_user
 from telebot import apihelper
+from groups.delete import delete
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
 from groups.reports import handle_report, handle_view_reports
-
+from groups.warns import handle_warn_command, handle_warns_command, handle_remove_warning
 load_dotenv()
 
 # Function to handle termination signals
@@ -92,6 +93,18 @@ def handle_warns(message: Message):
 @bot.callback_query_handler(func=lambda call: call.data.startswith('remove_warning'))
 def handle_remove_warning_callback(call):
     handle_remove_warning(call, db, bot)  
+
+@bot.message_handler(commands=['del'])
+def handle_del(message):
+    delete(bot, message)
+
+@bot.message_handler(commands=['pin'])
+def handle_pin(message):
+    pin(bot, message)
+
+@bot.message_handler(commands=['unpin'])
+def handle_upin(message):
+    unpin(bot, message)
 
 # Start the bot
 try:
