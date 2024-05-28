@@ -3,8 +3,6 @@ import chalk from 'chalk';
 const { say } = cfonts;
 import os from 'os';
 import { spawn } from 'child_process';
-const warn = `⚠️Warning ⚠️ Prediction Diagnosis Might be Wrong, You need to See a Vissible Doctor`;
-const log = `The bot was started...Lol goodluck silly boy!`;
 function startPythonScript() {
     console.log('Halima-Bot Starting...');
     const pythonProcess = spawn('python', ['Bot/main.py']);
@@ -46,7 +44,6 @@ const freeRamInGB = os.freemem() / (1024 * 1024 * 1024);
 console.log(chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
 console.log(chalk.yellow(`📃 Script by Abdul`));
 
-console.log(warn);
 
 
 

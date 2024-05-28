@@ -5,6 +5,7 @@ import signal
 import socket
 from pymongo import MongoClient
 import telebot
+from private.botinfo import botinfo
 from telebot.types import Message
 from dotenv import load_dotenv
 from groups.pin import pin, unpin
@@ -168,6 +169,10 @@ def handle_userinfo(message: Message):
 def handle_doc_command(message: Message):
     handle_doc(message, db, bot)
 
+
+@bot.message_handler(commands=['botinfo'])
+def handle_botinfo_command(message: Message):
+    botinfo(message, bot)
     
 # Start the bot
 try:
