@@ -1,7 +1,7 @@
 commands = """
 ❏━━『 DMS 』━━❏
 ┣ /userinfo 
-┣ /ydl <link>
+┣ /ytdl <link>
 ┣ /insta <link>
 ┣ /tikdl <link>
 ┣ /tictactoe

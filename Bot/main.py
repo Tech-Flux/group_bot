@@ -26,6 +26,8 @@ from groups.warns import handle_warn_command, handle_warns_command, handle_remov
 from private.register import start_command, handle_register_callback
 from private.info import userinfo
 from private.chatgpt import handle_doc
+from private.ytdlp import ytdl_command
+from private.insta import insta_command
 load_dotenv()
 
 
@@ -173,7 +175,16 @@ def handle_doc_command(message: Message):
 @bot.message_handler(commands=['botinfo'])
 def handle_botinfo_command(message: Message):
     botinfo(message, bot)
-    
+
+
+@bot.message_handler(commands=['ytdl'])
+def handle_ytdl(message: Message):
+    ytdl_command(message, bot)
+
+@bot.message_handler(commands=['insta'])
+def handle_ytdl(message: Message):
+    insta_command(message, bot)
+
 # Start the bot
 try:
     bot.polling()
