@@ -19,34 +19,42 @@ def handle_notes(message: Message, db, bot):
 def handle_view_notes(call, db, bot):
     group_id = call.message.chat.id
     notes_collection = db["notes"]
-    note = notes_collection.find_one({"group_id": group_id})
+
+    # Extracting note name from the callback data
+    note_name = call.data.split("_")[1]
+
+    note = notes_collection.find_one({"group_id": group_id, "note_name": note_name})
 
     if note and "note" in note:
-        bot.send_message(call.message.chat.id, f"Saved Note:\n{note['note']}")
+        bot.send_message(call.message.chat.id, f"Saved Note {note_name}:\n{note['note']}")
     else:
-        bot.send_message(call.message.chat.id, "No notes found for this group.")
+        bot.send_message(call.message.chat.id, f"No {note_name} notes found for this group.")
 
 def handle_edit_notes(call, db, bot):
     group_id = call.message.chat.id
     notes_collection = db["notes"]
-    note = notes_collection.find_one({"group_id": group_id})
+
+    # Extracting note name from the callback data
+    note_name = call.data.split("_")[1]
+
+    note = notes_collection.find_one({"group_id": group_id, "note_name": note_name})
 
     if note and "note" in note:
-        bot.send_message(call.message.chat.id, f"Current Note:\n{note['note']}\n\nPlease send the new note.")
+        bot.send_message(call.message.chat.id, f"Current Note {note_name}:\n{note['note']}\n\nPlease send the new note.")
     else:
-        bot.send_message(call.message.chat.id, "No notes found for this group. Please send the new note.")
+        bot.send_message(call.message.chat.id, f"No {note_name} notes found for this group. Please send the new note.")
 
-    bot.register_next_step_handler(call.message, save_new_note, db, bot)
+    bot.register_next_step_handler(call.message, lambda message: save_new_note(message, db, bot, note_name))
 
-def save_new_note(message: Message, db, bot):
+def save_new_note(message: Message, db, bot, note_name):
     group_id = message.chat.id
     new_note = message.text.strip()
 
     notes_collection = db["notes"]
     notes_collection.update_one(
-        {"group_id": group_id},
+        {"group_id": group_id, "note_name": note_name},
         {"$set": {"note": new_note}},
         upsert=True
     )
 
-    bot.reply_to(message, "Note updated successfully.")
+    bot.reply_to(message, f"Note {note_name} updated successfully.")

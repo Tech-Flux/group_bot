@@ -1,5 +1,6 @@
 import os
 import sys
+from colorama import Fore, Style
 import signal
 import socket
 from pymongo import MongoClient
@@ -14,11 +15,20 @@ from telebot import apihelper
 from groups.rules import rules
 from groups.delete import delete
 from groups.ban import ban, unban
+from groups.slow_mode import slow_mode
 from groups.mute import mute_user, unmute_user
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
 from groups.reports import handle_report, handle_view_reports
 from groups.warns import handle_warn_command, handle_warns_command, handle_remove_warning
+
+#PRIVATE
+from private.register import start_command, handle_register_callback
+from private.info import userinfo
+from private.chatgpt import handle_doc
 load_dotenv()
+
+
+print(Fore.RED + "Halima Started..." + Style.RESET_ALL)
 
 # Function to handle termination signals
 def signal_handler(sig, frame):
@@ -133,6 +143,32 @@ def handle_ban(message: Message):
 def handle_unban(message: Message):
     unban(bot, message)
 
+@bot.message_handler(commands=['slow'])
+def handle_slow_mode(message):
+    slow_mode(bot, message, db) 
+
+"""
+PRIVATE CHATS HANDLERS HERE
+"""
+@bot.message_handler(commands=['start'])
+def handle_start(message: Message):
+    start_command(message, db, bot)
+
+# Register the handler for the callback queries related to registration
+@bot.callback_query_handler(func=lambda call: call.data.startswith('register'))
+def handle_register_query(call):
+    handle_register_callback(call, db, bot)
+
+@bot.message_handler(commands=['userinfo'])
+def handle_userinfo(message: Message):
+    userinfo(bot, message, db)
+
+
+@bot.message_handler(commands=['doc'])
+def handle_doc_command(message: Message):
+    handle_doc(message, db, bot)
+
+    
 # Start the bot
 try:
     bot.polling()
