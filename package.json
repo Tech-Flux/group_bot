@@ -2,7 +2,7 @@
   "name": "starter",
   "version": "1.0.2",
   "description": "Telegram-Group-Bot",
-  "main": "index.js",
+  "main": "start.js",
   "scripts": {
     "start": "node start.js",
     "test": "npm start"
@@ -13,5 +13,11 @@
     "Halima-Bot"
   ],
   "author": "Abdulrahman",
-  "license": "ISC"
+  "license": "MIT",
+  "dependencies": {
+    "cfonts": "^3.2.0",
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0"
+  },
+  "type": "module"
 }
