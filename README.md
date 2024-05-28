@@ -1,14 +1,21 @@
-# Group Management Bot
+# 🤖Group Management Bot🤖
 
 ## Description
-[Include a brief description of your project]
+- **Warn Users**: Issue warnings to users.
+- **Promote Users**: Promote users to admin status.
+- **Demote Users**: Demote users from admin status.
+- **Kick Users**: Remove users from the group.
+- **Add Users**: Add new users to the group.
+
 
 ## Getting Started
 
 ### Prerequisites
 - Node.js installed
 - npm or yarn installed
-- [Any other prerequisites]
+- Python 3.7+
+- MongoDB
+- Telegram Bot Token
 
 
 ### Installation
@@ -19,7 +26,7 @@
 
    cd group_bot
 
-   pip install requirements.txt
+   pip install -r requirements.txt
 
    npm install
   
