@@ -18,7 +18,6 @@
 - Telegram Bot Token
 
 ### Installation
-1. *Clone the repository*
 
    ```sh
    git clone https://github.com/x-poison/group_bot.git
