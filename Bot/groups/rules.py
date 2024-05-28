@@ -2,12 +2,17 @@ from telebot.types import Message
 from .admin import is_user_admin, is_bot_admin
 
 def rules(bot, message: Message, db):
+    if message.chat.type not in ['group', 'supergroup']:
+        bot.reply_to(message, "This command can only be used in group chats.")
+        return
+
     chat_id = message.chat.id
     command = message.text.strip().lower()
+    
     if command == '/rules':
         rules_text = get_rules_from_db(chat_id, db)
         if rules_text:
-           bot.reply_to(message, f"Rules for {message.chat.title}:\n{rules_text}")
+            bot.reply_to(message, f"Rules for {message.chat.title}:\n{rules_text}")
         else:
             bot.reply_to(message, "No rules have been set for this group.")
     elif command.startswith('/rules ') and is_user_admin(bot, message.chat, message.from_user.id):
