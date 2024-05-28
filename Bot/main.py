@@ -8,11 +8,12 @@ from telebot.types import Message
 from dotenv import load_dotenv
 from groups.pin import pin, unpin
 from groups.admin import handle_promote, handle_demote
-from groups.kick import handle_kick
+from groups.kick import handle_kick, kickme
 from groups.add import handle_add_user
 from telebot import apihelper
 from groups.rules import rules
 from groups.delete import delete
+from groups.ban import ban, unban
 from groups.mute import mute_user, unmute_user
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
 from groups.reports import handle_report, handle_view_reports
@@ -63,6 +64,10 @@ def handle_demote_command(message: telebot.types.Message):
 @bot.message_handler(commands=['kick'])
 def handle_kick_command(message: telebot.types.Message):
     handle_kick(bot, message)
+
+@bot.message_handler(commands=['kickme'])
+def handle_kickme(message: Message):
+    kickme(bot, message)
 
 @bot.message_handler(commands=['adduser'])
 def handle_add_user_command(message: telebot.types.Message):
@@ -119,6 +124,14 @@ def handle_mute(message: Message):
 @bot.message_handler(commands=['unmute'])
 def handle_unmute(message: Message):
     unmute_user(bot, message)
+
+@bot.message_handler(commands=['ban'])
+def handle_ban(message: Message):
+    ban(bot, message)
+
+@bot.message_handler(commands=['unban'])
+def handle_unban(message: Message):
+    unban(bot, message)
 
 # Start the bot
 try:

@@ -27,3 +27,24 @@ def handle_kick(bot, message: Message):
             bot.reply_to(message, "Bad request!")
     else:
         bot.reply_to(message, "This command can only be used in group chats.")
+
+def kickme(bot, message: Message):
+    if message.chat.type not in ['group', 'supergroup']:
+        bot.reply_to(message, "This command can only be used in group chats.")
+        return
+
+    user_id = message.from_user.id
+
+    if is_user_admin(bot, message.chat, user_id):
+        bot.reply_to(message, "I can't am sorry!")
+        return
+
+    if not is_bot_admin(bot, message.chat.id):
+        bot.reply_to(message, "Am not admin!")
+        return
+
+    try:
+        bot.kick_chat_member(message.chat.id, user_id, revoke_messages=True)
+        bot.reply_to(message, "Bye! see you.")
+    except Exception as e:
+        bot.reply_to(message, f"Failed to kick you: {e}")
