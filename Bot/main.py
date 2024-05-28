@@ -4,13 +4,15 @@ import signal
 import socket
 from pymongo import MongoClient
 import telebot
+from telebot.types import Message
 from dotenv import load_dotenv
-from groups.warns import handle_warn_command
+from groups.warns import handle_warn_command, handle_warns_command, handle_remove_warning
 from groups.admin import handle_promote, handle_demote
 from groups.kick import handle_kick
 from groups.add import handle_add_user
 from telebot import apihelper
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
+from groups.reports import handle_report, handle_view_reports
 
 load_dotenv()
 
@@ -74,6 +76,22 @@ def handle_view_notes_callback(call):
 @bot.callback_query_handler(func=lambda call: call.data == "edit_notes")
 def handle_edit_notes_callback(call):
     handle_edit_notes(call, db, bot)
+
+@bot.message_handler(commands=['report'])
+def handle_report_command(message: telebot.types.Message):
+    handle_report(message, db, bot)
+
+@bot.message_handler(commands=['reports'])
+def handle_view_reports_command(message: telebot.types.Message):
+    handle_view_reports(message, db, bot) 
+
+@bot.message_handler(commands=['warns'])
+def handle_warns(message: Message):
+    handle_warns_command(message, db, bot)
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('remove_warning'))
+def handle_remove_warning_callback(call):
+    handle_remove_warning(call, db, bot)  
 
 # Start the bot
 try:
