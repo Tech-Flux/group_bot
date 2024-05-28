@@ -17,7 +17,6 @@
 - MongoDB
 - Telegram Bot Token
 
-
 ### Installation
 1. *Clone the repository*
 
