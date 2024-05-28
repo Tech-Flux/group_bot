@@ -3,7 +3,6 @@ import yt_dlp
 from telebot.types import Message
 from telebot import TeleBot
 
-# Store the progress messages by chat ID
 progress_messages = {}
 
 def ytdl_command(message: Message, bot: TeleBot):
@@ -44,5 +43,3 @@ def progress_hook(d, bot, chat_id):
             bot.edit_message_text(message_text, chat_id, progress_messages[chat_id])
         elif d['status'] == 'finished':
             bot.edit_message_text("Download complete, now processing...", chat_id, progress_messages[chat_id])
-
-# Ensure you import and register the command in your main.py

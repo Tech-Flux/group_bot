@@ -28,6 +28,8 @@ from private.info import userinfo
 from private.chatgpt import handle_doc
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
+from private.tictactoe.logic import init_bot
+from private.tictactoe.gold import add_user_gold, get_user_gold
 load_dotenv()
 
 
@@ -185,9 +187,19 @@ def handle_ytdl(message: Message):
 def handle_ytdl(message: Message):
     insta_command(message, bot)
 
+# Registering the Tic-Tac-Toe commands
+@bot.message_handler(commands=['tictactoe'])
+def handle_start_tictactoe(message: Message):
+    init_bot(message, db)
+
+@bot.message_handler(commands=['move'])
+def handle_move(message: Message):
+    move(message)
+
+@bot.message_handler(commands=['exit'])
+def handle_exit(message: Message):
+    exit_game(message)
+
+bot.polling()
 # Start the bot
-try:
-    bot.polling()
-except Exception as e:
-    sys.stderr.write(f"An error occurred: {e}\n")
-    sys.exit(1)
+
