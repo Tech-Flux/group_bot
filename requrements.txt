@@ -1,3 +1,4 @@
 telebot
 pymongo
 python-dotenv
+openai
