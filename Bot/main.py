@@ -13,6 +13,7 @@ from groups.add import handle_add_user
 from telebot import apihelper
 from groups.rules import rules
 from groups.delete import delete
+from groups.mute import mute_user, unmute_user
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
 from groups.reports import handle_report, handle_view_reports
 from groups.warns import handle_warn_command, handle_warns_command, handle_remove_warning
@@ -110,6 +111,14 @@ def handle_upin(message):
 @bot.message_handler(commands=['rules'])
 def handle_rules_command(message: Message):
     rules(bot, message, db) 
+
+@bot.message_handler(commands=['mute'])
+def handle_mute(message: Message):
+    mute_user(bot, message)
+
+@bot.message_handler(commands=['unmute'])
+def handle_unmute(message: Message):
+    unmute_user(bot, message)
 
 # Start the bot
 try:
