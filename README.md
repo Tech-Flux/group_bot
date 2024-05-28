@@ -6,6 +6,10 @@
 - **Demote Users**: Demote users from admin status.
 - **Kick Users**: Remove users from the group.
 - **Add Users**: Add new users to the group.
+- **Mute Users**: Mute users for a specified duration.
+- **Unmute Users**: Unmute previously muted users.
+- **Ban Users**: Permanently ban users from the group.
+- **Unban Users**: Remove the ban from users.
 
 
 ## Getting Started
@@ -16,6 +20,7 @@
 - Python 3.7+
 - MongoDB
 - Telegram Bot Token
+- ChatGpt ApiKey
 
 ### Installation
 
@@ -34,6 +39,17 @@
 
    OWNER_ID =
 
+   npm start
+
    ```
+
+## Contributions are welcome!
+
+- **Fork the Project**
+- **Create your Feature Branch (git checkout -b feature/AmazingFeature)**
+- **Commit your Changes (git commit -m 'Add some AmazingFeature')**
+- **Push to the Branch (git push origin feature/AmazingFeature)**
+- **Open a Pull Request**
+
 
 
