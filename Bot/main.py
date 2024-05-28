@@ -11,6 +11,7 @@ from groups.admin import handle_promote, handle_demote
 from groups.kick import handle_kick
 from groups.add import handle_add_user
 from telebot import apihelper
+from groups.rules import rules
 from groups.delete import delete
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
 from groups.reports import handle_report, handle_view_reports
@@ -105,6 +106,10 @@ def handle_pin(message):
 @bot.message_handler(commands=['unpin'])
 def handle_upin(message):
     unpin(bot, message)
+
+@bot.message_handler(commands=['rules'])
+def handle_rules_command(message: Message):
+    rules(bot, message, db) 
 
 # Start the bot
 try:
