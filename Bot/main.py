@@ -29,7 +29,7 @@ from private.info import userinfo
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
-from private.commands import admins
+from private.commands import admins, help_rules, help_notes
 load_dotenv()
 
 
@@ -168,16 +168,13 @@ def handle_register_query(call):
 def handle_userinfo(message: Message):
     userinfo(bot, message, db)
 
-
 @bot.message_handler(commands=['doc'])
 def handle_doc_command(message: Message):
     handle_doc(message, db, bot)
 
-
 @bot.message_handler(commands=['botinfo'])
 def handle_botinfo_command(message: Message):
     botinfo(message, bot)
-
 
 @bot.message_handler(commands=['ytdl'])
 def handle_ytdl(message: Message):
@@ -207,11 +204,11 @@ def handle_query(call):
         user_id = call.from_user.id
         bot.answer_callback_query(call.id, "Notes")
         bot.delete_message(call.message.chat.id, call.message.message_id)
-        bot.send_message(user_id, "Soon")
+        bot.send_message(user_id, help_notes)
 
-# Start the bot
-try:
-    bot.polling()
-except Exception as e:
-    sys.stderr.write(f"An error occurred: {e}\n")
-    sys.exit(1)
+    if call.data == 'button_rules':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Set rules")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_rules)
+bot.polling()

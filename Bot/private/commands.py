@@ -26,3 +26,16 @@ Helpful commands:
 If you have any bugs or questions on how to use me, have a look at my website
 All commands can be used with the following: / !
 """
+
+help_rules = """
+How to set rules
+- /rules <rules_here>
+- /rules
+𝚁𝚞𝚕𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
+"""
+help_notes = """
+How to save Notes
+- /notes <notes_here>
+- /note
+𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
+"""

@@ -35,7 +35,6 @@ function startPythonScript() {
 
 }
 
-
 startPythonScript();
 console.log(chalk.yellow(`🖥️ ${os.type()}, ${os.release()} - ${os.arch()}`));
 const ramInGB = os.totalmem() / (1024 * 1024 * 1024);
