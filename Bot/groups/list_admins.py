@@ -4,10 +4,8 @@ from telebot.types import Message
 def list_admins(message: Message, bot: telebot.TeleBot):
     if message.chat.type in ['group', 'supergroup']:
         try:
-            # Get the list of administrators
             chat_admins = bot.get_chat_administrators(message.chat.id)
             
-            # Prepare the response message
             admin_list = f"Admins in {message.chat.title}\n"
             for admin in chat_admins:
                 user = admin.user
@@ -18,7 +16,6 @@ def list_admins(message: Message, bot: telebot.TeleBot):
                     admin_list += f" (@{user.username})"
                 admin_list += "\n"
             
-            # Send the list of admins
             bot.send_message(message.chat.id, admin_list)
         except Exception as e:
             bot.send_message(message.chat.id, f"An error occurred: {e}")

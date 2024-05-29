@@ -191,16 +191,24 @@ def handle_ytdl(message: Message):
 def help(message: Message):
     send_help(message, bot)
 
-@bot.message_handler(commands=['admins'])
+@bot.message_handler(commands=['adminlist'])
 def handle_list_admins_command(message: Message):
     list_admins(message, bot)
 
-@bot.callback_query_handler(func=lambda call: call.data.startswith('button_') or call.data == 'first_option')
+@bot.callback_query_handler(func=lambda call: call.data.startswith('button_'))
 def handle_query(call):
-    if call.data == 'first_option':
+    if call.data == 'button_admins':
         user_id = call.from_user.id
-        bot.answer_callback_query(call.id, "You chose the First Option")
+        bot.answer_callback_query(call.id, "Admins")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, admins)
+
+    if call.data == 'button_notes':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Notes")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, "Soon")
+
 # Start the bot
 try:
     bot.polling()

@@ -7,8 +7,8 @@ def send_help(message: Message, bot):
 
     # Create 20 inline buttons with custom labels
     buttons = [
-        InlineKeyboardButton("Admin", callback_data="first_option"),
-        InlineKeyboardButton("Second Option", callback_data="second_option"),
+        InlineKeyboardButton("Admin", callback_data="button_admins"),
+        InlineKeyboardButton("Notes", callback_data="button_notes"),
         InlineKeyboardButton("Third Option", callback_data="third_option"),
         InlineKeyboardButton("Fourth Option", callback_data="fourth_option"),
         InlineKeyboardButton("Fifth Option", callback_data="fifth_option"),
