@@ -15,6 +15,7 @@ from groups.add import handle_add_user
 from telebot import apihelper
 from groups.rules import rules
 from groups.delete import delete
+from groups.list_admins import list_admins
 from groups.ban import ban, unban
 from groups.slow_mode import slow_mode
 from groups.mute import mute_user, unmute_user
@@ -28,6 +29,7 @@ from private.info import userinfo
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
+from private.commands import admins
 load_dotenv()
 
 
@@ -189,6 +191,16 @@ def handle_ytdl(message: Message):
 def help(message: Message):
     send_help(message, bot)
 
+@bot.message_handler(commands=['admins'])
+def handle_list_admins_command(message: Message):
+    list_admins(message, bot)
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('button_') or call.data == 'first_option')
+def handle_query(call):
+    if call.data == 'first_option':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "You chose the First Option")
+        bot.send_message(user_id, admins)
 # Start the bot
 try:
     bot.polling()
