@@ -27,6 +27,7 @@ from private.register import start_command, handle_register_callback
 from private.info import userinfo
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
+from private.help import send_help
 load_dotenv()
 
 
@@ -184,6 +185,9 @@ def handle_ytdl(message: Message):
 def handle_ytdl(message: Message):
     insta_command(message, bot)
 
+@bot.message_handler(commands=['help'])
+def help(message: Message):
+    send_help(message, bot)
 
 # Start the bot
 try:

@@ -2,3 +2,4 @@ telebot
 pymongo
 python-dotenv
 openai
+yt_dlp
