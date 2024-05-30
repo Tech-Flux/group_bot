@@ -56,3 +56,11 @@ How to set welcome and goodbye
  you can remove {name} to avoid mentioning them when they leave
  𝓖𝓻𝓮𝓮𝓽𝓲𝓷𝓰𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
  """
+ 
+help_locks = """
+How to set locks
+- /locks <on/off> media
+- /locks <on/off> words
+- /locks <on/off> url
+𝓛𝓸𝓬𝓴𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
+"""

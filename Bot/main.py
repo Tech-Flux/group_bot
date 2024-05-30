@@ -14,6 +14,7 @@ from groups.kick import handle_kick, kickme
 from groups.add import handle_add_user
 from telebot import apihelper
 from groups.rules import rules
+from groups.locks import setup_locks
 from groups.delete import delete
 from groups.list_admins import list_admins
 from groups.ban import ban, unban
@@ -29,7 +30,7 @@ from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
 from private.song_dl import song_downloader
-from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye
+from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks
 load_dotenv()
 
 
@@ -244,6 +245,7 @@ def handle_query(call):
         user_id = call.from_user.id
         bot.answer_callback_query(call.id, "Locks")
         bot.delete_message(call.message.chat.id, call.message.message_id)
-        bot.send_message(user_id, "Coming Soon")
+        bot.send_message(user_id, help_locks)
+setup_locks(bot, db)
 
 bot.polling()
