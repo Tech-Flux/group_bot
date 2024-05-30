@@ -51,3 +51,9 @@ How to set goodbyes
 - /good <admins>
 𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
 """
+help_downloads = """
+How to download media
+- /insta <link_here>
+- /ytdl <link_here>
+𝓓𝓸𝔀𝓷𝓵𝓸𝓪𝓭 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
+"""

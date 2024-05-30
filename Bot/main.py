@@ -29,7 +29,8 @@ from private.info import userinfo
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
-from private.commands import admins, help_rules, help_notes, help_welcomes, help_goodbyes
+from private.song_dl import song_downloader
+from private.commands import admins, help_rules, help_notes, help_welcomes, help_goodbyes, help_downloads
 load_dotenv()
 
 
@@ -184,6 +185,10 @@ def handle_ytdl(message: Message):
 def handle_ytdl(message: Message):
     insta_command(message, bot)
 
+@bot.message_handler(commands=['song'])
+def song_download(message: Message):
+    song_downloader(bot, message)
+
 @bot.message_handler(commands=['help'])
 def help(message: Message):
     send_help(message, bot)
@@ -229,4 +234,10 @@ def handle_query(call):
         bot.answer_callback_query(call.id, "Set goodbye")
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, help_goodbyes)
+
+    if call.data == 'button_downloads':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Downloads")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_downloads)
 bot.polling()
