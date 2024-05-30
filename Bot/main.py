@@ -5,7 +5,7 @@ import signal
 import socket
 from pymongo import MongoClient
 import telebot
-from private.botinfo import botinfo
+from groups.clear_messages import clear_command
 from telebot.types import Message
 from dotenv import load_dotenv
 from groups.pin import pin, unpin
@@ -191,6 +191,12 @@ def help(message: Message):
 @bot.message_handler(commands=['adminlist'])
 def handle_list_admins_command(message: Message):
     list_admins(message, bot)
+
+
+@bot.message_handler(commands=['clear'])
+def handle_clear_command(message: Message):
+    clear_command(bot, message)
+
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('button_'))
 def handle_query(call):
