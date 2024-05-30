@@ -55,5 +55,6 @@ help_downloads = """
 How to download media
 - /insta <link_here>
 - /ytdl <link_here>
+- /song <song_name>
 𝓓𝓸𝔀𝓷𝓵𝓸𝓪𝓭 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
 """

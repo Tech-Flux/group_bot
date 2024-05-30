@@ -21,6 +21,7 @@ from groups.slow_mode import slow_mode
 from groups.mute import mute_user, unmute_user
 from groups.notes import handle_notes, handle_view_notes, handle_edit_notes
 from groups.reports import handle_report, handle_view_reports
+from groups.greetings import set_welcome, set_goodbye, welcome_goodbye_handler
 from groups.warns import handle_warn_command, handle_warns_command, handle_remove_warning
 
 #PRIVATE
@@ -64,6 +65,12 @@ db = client["Hospital"]
 
 telegram_bot_token = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(telegram_bot_token)
+
+
+set_welcome(bot, db)
+set_goodbye(bot, db)
+welcome_goodbye_handler(bot, db)
+
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
