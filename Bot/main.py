@@ -33,6 +33,7 @@ from private.help import send_help
 from private.openai import setup_ai
 from private.compress_image import setup_compress
 from private.song_dl import song_downloader
+from private.searchai import setup_google_search
 from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks, help_ai
 load_dotenv()
 logging.basicConfig(filename="bot.log",
@@ -70,13 +71,14 @@ db = client["Hospital"]
 ai_key = os.getenv("OPENAI_KEY")
 telegram_bot_token = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(telegram_bot_token)
-
+serpapi_api_key = os.getenv('SERPAPI_API_KEY')
 
 set_welcome(bot, db)
 set_goodbye(bot, db)
 welcome_goodbye_handler(bot, db)
 setup_ai(bot, ai_key)
 setup_compress(bot)
+setup_google_search(bot, serpapi_api_key)
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
