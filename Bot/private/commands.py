@@ -64,3 +64,9 @@ How to set locks
 - /locks <on/off> url
 𝓛𝓸𝓬𝓴𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
 """
+help_ai = """
+Artificial Inteligent
+- /ai <prompt>
+- /compress
+𝑨𝒊 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
+"""

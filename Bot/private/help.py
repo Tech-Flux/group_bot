@@ -15,7 +15,7 @@ def send_help(message: Message, bot):
         InlineKeyboardButton("Greetings", callback_data="button_greetings"),
         InlineKeyboardButton("Locks", callback_data="button_locks"),
         InlineKeyboardButton("Downloader", callback_data="button_downloads"),
-        InlineKeyboardButton("Seventh Option", callback_data="seventh_option"),
+        InlineKeyboardButton("Ai", callback_data="button_ai"),
         InlineKeyboardButton("Eighth Option", callback_data="eighth_option"),
         InlineKeyboardButton("Ninth Option", callback_data="ninth_option"),
         InlineKeyboardButton("Tenth Option", callback_data="tenth_option"),

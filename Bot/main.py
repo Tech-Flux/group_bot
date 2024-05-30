@@ -1,6 +1,7 @@
 import os
 import sys
 import signal
+import logging
 import socket
 import telebot
 from colorama import Fore, Style
@@ -29,10 +30,15 @@ from private.info import userinfo
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
+from private.openai import setup_ai
+from private.compress_image import setup_compress
 from private.song_dl import song_downloader
-from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks
+from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks, help_ai
 load_dotenv()
-
+logging.basicConfig(filename="bot.log",
+                    level=logging.INFO,
+                    format='%(asctime)s %(levelname)s - %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
 
 print(Fore.RED + "Halima Started..." + Style.RESET_ALL)
 
@@ -61,7 +67,7 @@ if not check_internet():
 uri = os.getenv("DATABASE_URI")
 client = MongoClient(uri)
 db = client["Hospital"]
-
+ai_key = os.getenv("OPENAI_KEY")
 telegram_bot_token = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(telegram_bot_token)
 
@@ -69,7 +75,8 @@ bot = telebot.TeleBot(telegram_bot_token)
 set_welcome(bot, db)
 set_goodbye(bot, db)
 welcome_goodbye_handler(bot, db)
-
+setup_ai(bot, ai_key)
+setup_compress(bot)
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
@@ -246,6 +253,13 @@ def handle_query(call):
         bot.answer_callback_query(call.id, "Locks")
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, help_locks)
+
+    if call.data == 'button_ai':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "ai")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_ai)
+
 setup_locks(bot, db)
 
 bot.polling()
