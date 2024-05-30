@@ -4,6 +4,10 @@ from .admin import is_user_admin, is_bot_admin
 def set_welcome(bot, db):
     @bot.message_handler(commands=['setwelcome'])
     def set_welcome_message(message: Message):
+        if message.chat.type == 'private':
+            bot.reply_to(message, "This command can only be used in groups.")
+            return
+        
         try:
             if not is_user_admin(bot, message.chat, message.from_user.id):
                 bot.reply_to(message, "You are not an admin in this group.")
@@ -28,6 +32,10 @@ def set_welcome(bot, db):
 def set_goodbye(bot, db):
     @bot.message_handler(commands=['setgoodbye'])
     def set_goodbye_message(message: Message):
+        if message.chat.type == 'private':
+            bot.reply_to(message, "This command can only be used in groups.")
+            return
+        
         try:
             if not is_user_admin(bot, message.chat, message.from_user.id):
                 bot.reply_to(message, "You are not an admin in this group.")
@@ -52,6 +60,9 @@ def set_goodbye(bot, db):
 def welcome_goodbye_handler(bot, db):
     @bot.message_handler(content_types=['new_chat_members'])
     def welcome_new_members(message: Message):
+        if message.chat.type == 'private':
+            return
+        
         try:
             group_id = message.chat.id
             group_data = db.messages.find_one({"_id": group_id})
@@ -68,6 +79,8 @@ def welcome_goodbye_handler(bot, db):
 
     @bot.message_handler(content_types=['left_chat_member'])
     def goodbye_left_member(message: Message):
+        if message.chat.type == 'private':
+            return
         try:
             group_id = message.chat.id
             group_data = db.messages.find_one({"_id": group_id})

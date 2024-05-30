@@ -39,18 +39,7 @@ How to save Notes
 - /note
 𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
 """
-help_welcomes = """
-How to set welcomes
-- /welcome <welcome_here>
-- /welcome <admins>
-𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
-"""
-help_goodbyes = """
-How to set goodbyes
-- /goodbye <message_here>
-- /good <admins>
-𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
-"""
+
 help_downloads = """
 How to download media
 - /insta <link_here>
@@ -58,3 +47,12 @@ How to download media
 - /song <song_name>
 𝓓𝓸𝔀𝓷𝓵𝓸𝓪𝓭 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
 """
+help_welcome_goodbye = """
+How to set welcome and goodbye
+- /setwelcome <{name} rest_of_the_message>
+ you can remove {name} to not mention them
+
+- /setgoodbye <{name} rest_of_the_message>
+ you can remove {name} to avoid mentioning them when they leave
+ 𝓖𝓻𝓮𝓮𝓽𝓲𝓷𝓰𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼
+ """
