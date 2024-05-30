@@ -4,7 +4,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from telebot.types import Message
 def send_help(message: Message, bot):
     if message.chat.type != 'private':
-        bot.reply_to(message, "This command can only be used in private messages.")
+        bot.reply_to(message, "Send this in pm for help!")
         return
         
     markup = InlineKeyboardMarkup()
@@ -12,8 +12,8 @@ def send_help(message: Message, bot):
         InlineKeyboardButton("Admin", callback_data="button_admins"),
         InlineKeyboardButton("Notes", callback_data="button_notes"),
         InlineKeyboardButton("Rules", callback_data="button_rules"),
-        InlineKeyboardButton("Fourth Option", callback_data="fourth_option"),
-        InlineKeyboardButton("Fifth Option", callback_data="fifth_option"),
+        InlineKeyboardButton("Welcome", callback_data="button_welcomes"),
+        InlineKeyboardButton("Goodbye", callback_data="button_goodbyes"),
         InlineKeyboardButton("Sixth Option", callback_data="sixth_option"),
         InlineKeyboardButton("Seventh Option", callback_data="seventh_option"),
         InlineKeyboardButton("Eighth Option", callback_data="eighth_option"),

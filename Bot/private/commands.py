@@ -39,3 +39,15 @@ How to save Notes
 - /note
 𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
 """
+help_welcomes = """
+How to set welcomes
+- /welcome <welcome_here>
+- /welcome <admins>
+𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
+"""
+help_goodbyes = """
+How to set goodbyes
+- /goodbye <message_here>
+- /good <admins>
+𝙽𝚘𝚝𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍
+"""

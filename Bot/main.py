@@ -29,7 +29,7 @@ from private.info import userinfo
 from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
-from private.commands import admins, help_rules, help_notes
+from private.commands import admins, help_rules, help_notes, help_welcomes, help_goodbyes
 load_dotenv()
 
 
@@ -217,4 +217,16 @@ def handle_query(call):
         bot.answer_callback_query(call.id, "Set rules")
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, help_rules)
+
+    if call.data == 'button_welcomes':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Set welcome")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_welcomes)
+
+    if call.data == 'button_goodbyes':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Set goodbye")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_goodbyes)
 bot.polling()
