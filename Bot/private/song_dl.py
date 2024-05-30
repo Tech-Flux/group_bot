@@ -43,9 +43,7 @@ def song_downloader(bot: telebot.TeleBot, message: Message):
 def progress_hook(d, bot, chat_id):
     if chat_id in progress_messages:
         if d['status'] == 'downloading':
-            message_text = (
-                f"Downloading: {d['_percent_str']} "
-            )
+            message_text = f"Downloading: {d['_percent_str']} of {d['_total_bytes_str']} at {d['_speed_str']} ETA {d['_eta_str']}"
             bot.edit_message_text(message_text, chat_id, progress_messages[chat_id])
         elif d['status'] == 'finished':
             bot.edit_message_text("Download complete, now processing...", chat_id, progress_messages[chat_id])
