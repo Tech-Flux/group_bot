@@ -32,16 +32,16 @@ def handle_warn_command(message, db, bot):
                 bot.reply_to(message, "I am not going to warn an admin.")
                 return
             warn_count = increment_warns(chat_id, user_id, db, bot)
-            if warn_count == 3:
+            if warn_count == 5:
                 warns_collection.delete_one({'chat_id': chat_id, 'user_id': user_id})
                 try:
                     bot.kick_chat_member(chat_id, user_id, revoke_messages=True)
-                    bot.reply_to(message, "User kicked due to reaching 3 warns.")
+                    bot.reply_to(message, "User kicked due to reaching 5 warns.")
                     return  
                 except Exception as e:
                     bot.reply_to(message, "Failed to kick the user.")
             else:
-                bot.reply_to(message, f"User warned ({warn_count}/3).")
+                bot.reply_to(message, f"User warned ({warn_count}/5).")
         else:
             bot.reply_to(message, "Please reply to a message to warn a user.")
     else:

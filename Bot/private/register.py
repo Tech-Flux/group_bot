@@ -18,15 +18,19 @@ def start_command(message: Message, db, bot):
             yes_button = InlineKeyboardButton("Yes", callback_data="register_yes")
             no_button = InlineKeyboardButton("No", callback_data="register_no")
             keyboard.row(yes_button, no_button)
-            bot.send_message(user_id, "Do you want to register?", reply_markup=keyboard)
+            bot.send_message(user_id, "Do you want to continue?", reply_markup=keyboard)
 
 def handle_register_callback(call, db, bot):
     user_id = call.from_user.id
     if call.data == "register_yes":
         register_user(user_id, db)
-        bot.send_message(user_id, "You have been successfully registered.")
+        bot.send_message(user_id, "You have been successfully registered. type /start now")
     elif call.data == "register_no":
-        bot.send_message(user_id, "You chose not to register. Goodbye!")
+        try:
+            bot.delete_message(call.message.chat.id, call.message.message_id)
+        except Exception as e:
+            print(f"An error occurred while deleting message: {e}")
+
 
 def check_registration(user_id, db):
     registered = db["registered_users"].find_one({"user_id": user_id})
