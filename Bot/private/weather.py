@@ -114,4 +114,32 @@ def riddle_command(bot: telebot.TeleBot):
                 bot.reply_to(message, "❌ Oops! Couldn't fetch a riddle right now. Please try again later.")
         except Exception as e:
             bot.reply_to(message, f"⚠️ An error occurred: {e}")
-      
+
+
+
+# Function to fetch Islamic quotes
+def fetch_islamic_quote():
+    url = "https://api.quotable.io/random"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        typ = data.get("tags", "")
+        quote = data.get("content", "")
+        author = data.get("author", "Unknown")
+        return typ, quote, author
+    else:
+        return None, None
+
+# Function to handle the /islamicquote command
+def quote_command(bot: telebot.TeleBot):
+    @bot.message_handler(commands=['quote'])
+    def handle_islamicquote_command(message: Message):
+        try:
+            typ, quote, author = fetch_islamic_quote()
+            if quote:
+                response = f"{typ}\n\n{quote}\n\n- {author}"
+                bot.reply_to(message, response)
+            else:
+                bot.reply_to(message, "❌ Oops! Couldn't fetch an Islamic quote right now. Please try again later.")
+        except Exception as e:
+            bot.reply_to(message, f"⚠️ An error occurred: {e}")

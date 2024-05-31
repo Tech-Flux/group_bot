@@ -71,6 +71,7 @@ Artificial Inteligent
 - /joke
 - /weather <city>
 - /riddle
+- /quotes
 𝑨𝒊 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """
 
