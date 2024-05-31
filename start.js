@@ -10,7 +10,6 @@ import open from 'open';
 
 const { say } = cfonts;
 
-// Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -49,7 +48,7 @@ function listFilesWithDelay(folderPath, delay) {
 
         const iterateFiles = (index) => {
             if (index < files.length) {
-                const fileName = files[index].replace(/\.py$/, ''); // Remove .py extension
+                const fileName = files[index].replace(/\.py$/, ''); 
                 console.log(chalk.greenBright("                Module ") + chalk.yellow(fileName));
                 setTimeout(() => iterateFiles(index + 1), delay);
             }
@@ -76,8 +75,8 @@ const freeRamInGB = os.freemem() / (1024 * 1024 * 1024);
 console.log("                " + chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
 console.log("                " + chalk.yellow(`📃 Script by Abdul`));
 
-// Serve an HTML file on port 8080
-const htmlFilePath = path.join(__dirname, 'Halima/main.html'); // Ensure the main.html file is in the same directory as this script
+
+const htmlFilePath = path.join(__dirname, 'Halima/main.html');
 
 const server = http.createServer((req, res) => {
     fs.readFile(htmlFilePath, (err, data) => {
@@ -94,5 +93,5 @@ const server = http.createServer((req, res) => {
 
 server.listen(8080, () => {
     console.log(chalk.green("Server is running on port 8080"));
-    open('http://localhost:8080'); // Open the web page automatically
+    open('http://localhost:8080'); 
 });
