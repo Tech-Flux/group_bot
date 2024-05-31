@@ -18,7 +18,7 @@ def send_help(message: Message, bot):
         InlineKeyboardButton("Ai", callback_data="button_ai"),
         InlineKeyboardButton("Database", callback_data="button_db"),
         InlineKeyboardButton("Qur'an", callback_data="button_isl"),
-        InlineKeyboardButton("Tenth Option", callback_data="tenth_option"),
+        InlineKeyboardButton("Owner", callback_data="button_owner"),
         InlineKeyboardButton("Eleventh Option", callback_data="eleventh_option"),
         InlineKeyboardButton("Twelfth Option", callback_data="twelfth_option"),
         InlineKeyboardButton("Thirteenth Option", callback_data="thirteenth_option"),

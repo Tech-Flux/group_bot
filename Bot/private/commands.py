@@ -68,6 +68,8 @@ help_ai = """
 Artificial Inteligent
 - /ai <prompt>
 - /compress
+- /joke
+- /weather <city>
 𝑨𝒊 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """
 
@@ -83,4 +85,13 @@ Read Some Qur'an
 - /chapter <number>
 - /hadith <someone>
 𝑰𝒔𝒍𝒂𝒎 𝑯𝒆𝒓𝒆
+"""
+owner_commands = """
+This can only be used by My owner
+- /database <checks about Bot>
+- /clearlogs <clears_logs>
+- /delprem <user_id>
+- /addprem <user_id>
+- /premusers
+𝑶𝒘𝒏𝒆𝒓 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """

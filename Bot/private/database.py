@@ -49,13 +49,11 @@ def user_info_cmd(bot: telebot.TeleBot, db):
             last_name = message.from_user.last_name
             user_full_name = f"{first_name} {last_name}".strip()
 
-            # Retrieve user info from db["registered_users"]
             user_info = db["registered_users"].find_one({"user_id": user_id})
             if not user_info:
                 bot.reply_to(message, "You are not registered in the bot database.")
                 return
 
-            # Retrieve warnings from db["user_warns"]
             user_warns = db["user_warns"].find({"user_id": user_id})
             warns_info = {}
             for warn in user_warns:
@@ -73,15 +71,19 @@ def user_info_cmd(bot: telebot.TeleBot, db):
                 locks = group.get("locks", {})
                 if any(lock for lock in locks.values()):
                     locks_info[group_id] = locks
+            
+            # Check if the user is in the premium list
+            is_premium = db["premium"].find_one({"user_id": user_id}) is not None
 
+            # Construct the response
+            response = f"User Info:\nUser ID: {user_id}\nName: {user_full_name}\nPremium User: {'True' if is_premium else 'False'}\n\n"
+            response += "Warnings in Groups:\n"
             # Retrieve chat names
             chat_names = {}
             for group_id in set(warns_info.keys()).union(set(locks_info.keys())):
                 chat = bot.get_chat(group_id)
                 chat_names[group_id] = chat.title if chat.title else f"Group {group_id}"
 
-            response = f"User Info:\nUser ID: {user_id}\nName: {user_full_name}\n\n"
-            response += "Warnings in Groups:\n"
             for group_id, warn_count in warns_info.items():
                 response += f"{chat_names.get(group_id, f'Group {group_id}')}: {warn_count} warns\n"
 

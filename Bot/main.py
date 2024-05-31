@@ -36,8 +36,11 @@ from private.song_dl import song_downloader
 from private.quran import setup_quran_command, setup_hadith_command
 from private.entire_chapter import setup_quran_chapter
 from private.searchai import setup_google_search
+from private.botlog import setup_clearlogs_command
+from private.premium import premium_commands
+from private.weather import setup_weather_command, joke_command, riddle_command
 from private.database import users_list, user_info_cmd
-from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database, Quran_help
+from private.commands import admins, help_rules, help_notes, owner_commands, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database, Quran_help
 load_dotenv()
 logging.basicConfig(filename="bot.log",
                     level=logging.INFO,
@@ -88,7 +91,11 @@ user_info_cmd(bot, db)
 setup_quran_command(bot)
 setup_hadith_command(bot)
 setup_quran_chapter(bot)
-
+setup_clearlogs_command(bot, authorized_user_id)
+premium_commands(bot, db, authorized_user_id)
+setup_weather_command(bot)
+joke_command(bot)
+riddle_command(bot)
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
@@ -283,6 +290,12 @@ def handle_query(call):
         bot.answer_callback_query(call.id, "Islamic Room")
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, Quran_help)
+
+    if call.data == 'button_owner':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Owner commands")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, owner_commands)
 
 
 setup_locks(bot, db)
