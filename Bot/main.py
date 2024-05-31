@@ -34,7 +34,7 @@ from private.openai import setup_ai
 from private.compress_image import setup_compress
 from private.song_dl import song_downloader
 from private.searchai import setup_google_search
-from private.database import users_list
+from private.database import users_list, user_info_cmd
 from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks, help_ai
 load_dotenv()
 logging.basicConfig(filename="bot.log",
@@ -82,6 +82,7 @@ setup_ai(bot, ai_key)
 setup_compress(bot)
 setup_google_search(bot, serpapi_api_key)
 users_list(bot, db, authorized_user_id)
+user_info_cmd(bot, db)
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
