@@ -18,7 +18,6 @@ def users_list(bot: telebot.TeleBot, db, authorized_user_id: int):
             registered_users = db["registered_users"].find()
             users_list = list(registered_users)
 
-            # Convert ObjectId to str for JSON serialization
             for user in users_list:
                 user["_id"] = str(user["_id"])
 
