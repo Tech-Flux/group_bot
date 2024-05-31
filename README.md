@@ -35,9 +35,13 @@
   
    BOT_TOKEN = 
 
-   DATABASE_URI = 
+   DATABASE_URI = ""
 
-   OWNER_ID =
+   AUTHORIZED_USER_ID =
+
+   OPENAI_KEY = 
+
+   SERPAPI_API_KEY =
 
    npm start
 
