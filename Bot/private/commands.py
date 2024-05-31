@@ -70,6 +70,7 @@ Artificial Inteligent
 - /compress
 - /joke
 - /weather <city>
+- /riddle
 𝑨𝒊 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """
 
