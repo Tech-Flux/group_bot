@@ -45,6 +45,9 @@ def user_info_cmd(bot: telebot.TeleBot, db):
                 return
 
             user_id = message.from_user.id
+            first_name = message.from_user.first_name
+            last_name = message.from_user.last_name
+            user_full_name = f"{first_name} {last_name}".strip()
 
             # Retrieve user info from db["registered_users"]
             user_info = db["registered_users"].find_one({"user_id": user_id})
@@ -71,15 +74,20 @@ def user_info_cmd(bot: telebot.TeleBot, db):
                 if any(lock for lock in locks.values()):
                     locks_info[group_id] = locks
 
+            # Retrieve chat names
+            chat_names = {}
+            for group_id in set(warns_info.keys()).union(set(locks_info.keys())):
+                chat = bot.get_chat(group_id)
+                chat_names[group_id] = chat.title if chat.title else f"Group {group_id}"
 
-            response = f"User Info:\nUser ID: {user_id}\nName: {user_info.get('name', 'N/A')}\n\n"
+            response = f"User Info:\nUser ID: {user_id}\nName: {user_full_name}\n\n"
             response += "Warnings in Groups:\n"
             for group_id, warn_count in warns_info.items():
-                response += f"Group {group_id}: {warn_count} warns\n"
+                response += f"{chat_names.get(group_id, f'Group {group_id}')}: {warn_count} warns\n"
 
             response += "\nLocks in Groups:\n"
             for group_id, locks in locks_info.items():
-                response += f"Group {group_id}: {', '.join([lock for lock, state in locks.items() if state])} enabled\n"
+                response += f"{chat_names.get(group_id, f'Group {group_id}')}: {', '.join([lock for lock, state in locks.items() if state])} enabled\n\n"
 
             bot.reply_to(message, response)
 

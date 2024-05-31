@@ -70,3 +70,10 @@ Artificial Inteligent
 - /compress
 𝑨𝒊 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """
+
+help_database = """
+Interact with database
+- /myinfo
+- /database
+𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
+"""

@@ -35,7 +35,7 @@ from private.compress_image import setup_compress
 from private.song_dl import song_downloader
 from private.searchai import setup_google_search
 from private.database import users_list, user_info_cmd
-from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks, help_ai
+from private.commands import admins, help_rules, help_notes, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database
 load_dotenv()
 logging.basicConfig(filename="bot.log",
                     level=logging.INFO,
@@ -265,6 +265,12 @@ def handle_query(call):
         bot.answer_callback_query(call.id, "ai")
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, help_ai)
+
+    if call.data == 'button_db':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Database")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_database)
 
 setup_locks(bot, db)
 

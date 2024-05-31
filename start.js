@@ -1,9 +1,19 @@
 import cfonts from 'cfonts';
 import chalk from 'chalk';
-const { say } = cfonts;
 import os from 'os';
 import fs from 'fs';
 import { spawn } from 'child_process';
+import http from 'http';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import open from 'open';
+
+const { say } = cfonts;
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 function startPythonScript() {
     console.log('Halima-Bot Starting...');
     const pythonProcess = spawn('python', ['Bot/main.py']);
@@ -12,18 +22,16 @@ function startPythonScript() {
         font: 'chrome',
         align: 'center',
         gradient: ['red', 'magenta']
-      })
-      say(`Team Poison`, {
+    });
+    say('Team Poison', {
         font: 'console',
         align: 'center',
         gradient: ['cyan', 'magenta']
-      })
-      
+    });
 
     pythonProcess.stdout.on('data', (data) => {
         console.log(`Python stdout: ${data}`);
     });
-
 
     pythonProcess.stderr.on('data', (data) => {
         console.error(`Python stderr: ${data}`);
@@ -33,9 +41,7 @@ function startPythonScript() {
         console.log(`Python script exited with code ${code}. Restarting...`);
         startPythonScript();
     });
-
 }
-
 
 function listFilesWithDelay(folderPath, delay) {
     try {
@@ -57,20 +63,36 @@ function listFilesWithDelay(folderPath, delay) {
 
 const groups = './Bot/groups';
 const privates = './Bot/private';
-const delay = 1000; 
+const delay = 1000;
 
-// Call the function to list files in each folder with a delay
 listFilesWithDelay(groups, delay);
 listFilesWithDelay(privates, delay);
 
 startPythonScript();
-console.log("                "+chalk.yellow(`🖥️ ${os.type()}, ${os.release()} - ${os.arch()}`));
+console.log("                " + chalk.yellow(`🖥️ ${os.type()}, ${os.release()} - ${os.arch()}`));
 const ramInGB = os.totalmem() / (1024 * 1024 * 1024);
-console.log("                "+chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`));
+console.log("                " + chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`));
 const freeRamInGB = os.freemem() / (1024 * 1024 * 1024);
-console.log("                "+chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
-console.log("                "+chalk.yellow(`📃 Script by Abdul`));
+console.log("                " + chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
+console.log("                " + chalk.yellow(`📃 Script by Abdul`));
 
+// Serve an HTML file on port 8080
+const htmlFilePath = path.join(__dirname, 'Halima/main.html'); // Ensure the main.html file is in the same directory as this script
 
+const server = http.createServer((req, res) => {
+    fs.readFile(htmlFilePath, (err, data) => {
+        if (err) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.write('404 Not Found');
+        } else {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.write(data);
+        }
+        res.end();
+    });
+});
 
-
+server.listen(8080, () => {
+    console.log(chalk.green("Server is running on port 8080"));
+    open('http://localhost:8080'); // Open the web page automatically
+});
