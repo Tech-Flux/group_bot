@@ -93,5 +93,9 @@ const server = http.createServer((req, res) => {
 
 server.listen(8080, () => {
     console.log(chalk.green("Server is running on port 8080"));
-    open('http://localhost:8080'); 
+
+    /**uncomment to auto open webpage of the bot in your machine */
+
+  //  open('http://localhost:8080'); 
 });
+

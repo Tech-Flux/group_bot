@@ -3,3 +3,4 @@ pymongo
 python-dotenv
 openai
 yt_dlp
+googletrans

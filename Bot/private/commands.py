@@ -77,3 +77,10 @@ Interact with database
 - /database
 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """
+Quran_help = """
+Read Some Qur'an
+- /quran <chapter:verse>
+- /chapter <number>
+- /hadith <someone>
+𝑰𝒔𝒍𝒂𝒎 𝑯𝒆𝒓𝒆
+"""
