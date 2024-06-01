@@ -1,7 +1,13 @@
 import requests
 import telebot
 from telebot.types import Message
+import os
+from os import path
+import json
+import random
 
+current_directory = path.dirname(path.abspath(__file__))
+hadith = path.join(current_directory, 'hadith.json')
 
 def fetch_quran_verse(chapter, verse_to):
     arabic_url = f"https://api.alquran.cloud/v1/ayah/{chapter}:{verse_to}/ar.asad"
@@ -68,31 +74,42 @@ def setup_quran_command(bot: telebot.TeleBot):
         except Exception as e:
             bot.reply_to(message, f"An error occurred: {e}")
 
-
-
-def fetch_hadith(query):
-    url = f"https://api.muslimpro.com/en/v2/hadiths?filter={query}"
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        data = response.json()
-        if data.get("data"):
-            hadith = data["data"][0]  
-            return hadith.get("body")  
-    return None
-
-# Function to set up the Hadith command
 def setup_hadith_command(bot: telebot.TeleBot):
-    @bot.message_handler(commands=["hadith"])
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    hadith = os.path.join(current_directory, 'hadith.json')
+    
+    @bot.message_handler(commands=['hadith'])
     def handle_hadith_command(message: Message):
+        if message.chat.type != "private":
+            bot.reply_to(message, "This command can only be used in private chats.")
+            return
+
         try:
-            command_text = message.text.split(" ", 1)[1]  
-            hadith_text = fetch_hadith(command_text)
-            if hadith_text:
-                bot.reply_to(message, f"Hadith:\n{hadith_text}")
-            else:
-                bot.reply_to(message, "No Hadith found for the given query.")
-        except IndexError:
-            bot.reply_to(message, "Usage: /hadith <query>")
+            with open(hadith, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+
+            hadiths = data['hadiths']
+            selected_hadith = random.choice(hadiths)
+            
+            hadith_id = selected_hadith['id']
+            arabic_text = selected_hadith['arabic']
+            english_text = selected_hadith.get('english', 'No English translation available.')
+            
+            metadata = data['metadata']
+            arabic_title = metadata['arabic']['title']
+            arabic_author = metadata['arabic']['author']
+            english_title = metadata['english']['title']
+            english_author = metadata['english']['author']
+            
+            response = (
+                f"📖 **{english_title}**\n"
+                f"✍️ **Author:** {english_author}\n\n"
+                f"🔢 **Hadith Number:** {hadith_id}\n\n"
+                f"🇸🇦 **Arabic:**\n{arabic_text}\n\n"
+                f" **English:**\n{english_text}\n"
+            )
+            
+            bot.reply_to(message, response, parse_mode='Markdown')
+        
         except Exception as e:
-            bot.reply_to(message, f"An error occurred: {e}")
+            bot.reply_to(message, f"⚠️ An error occurred: {e}")

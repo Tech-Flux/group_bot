@@ -4,7 +4,10 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from telebot.types import Message
 def send_help(message: Message, bot):
     if message.chat.type != 'private':
-        bot.reply_to(message, "Send this in pm for help!")
+        markup = InlineKeyboardMarkup()
+        help_button = InlineKeyboardButton(text="Click me for help!", url=f"t.me/{bot.get_me().username}?start=help")
+        markup.add(help_button)
+        bot.reply_to(message, "Send this in PM for help!", reply_markup=markup)
         return
         
     markup = InlineKeyboardMarkup()

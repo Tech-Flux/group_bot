@@ -19,6 +19,13 @@ def start_command(message: Message, db, bot):
             no_button = InlineKeyboardButton("No", callback_data="register_no")
             keyboard.row(yes_button, no_button)
             bot.send_message(user_id, "Do you want to continue?", reply_markup=keyboard)
+            
+    if message.chat.type != 'private':
+        markup = InlineKeyboardMarkup()
+        help_button = InlineKeyboardButton(text="Click me for help!", url=f"t.me/{bot.get_me().username}?start=help")
+        markup.add(help_button)
+        bot.reply_to(message, "Send this in PM for help!", reply_markup=markup)
+        return
 
 def handle_register_callback(call, db, bot):
     user_id = call.from_user.id

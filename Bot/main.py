@@ -38,6 +38,8 @@ from private.entire_chapter import setup_quran_chapter
 from private.searchai import setup_google_search
 from private.botlog import setup_clearlogs_command
 from private.premium import premium_commands
+from private.addme import addme_command
+from private.broadcast import  setup_broadcast_command
 from private.weather import setup_weather_command, joke_command, riddle_command, quote_command
 from private.database import users_list, user_info_cmd
 from private.commands import admins, help_rules, help_notes, owner_commands, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database, Quran_help
@@ -97,6 +99,8 @@ setup_weather_command(bot)
 joke_command(bot)
 riddle_command(bot)
 quote_command(bot)
+addme_command(bot, authorized_user_id)
+setup_broadcast_command(bot, db, authorized_user_id)
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
@@ -212,15 +216,15 @@ def handle_botinfo_command(message: Message):
 
 @bot.message_handler(commands=['ytdl'])
 def handle_ytdl(message: Message):
-    ytdl_command(message, bot)
+    ytdl_command(message, bot, db)
 
 @bot.message_handler(commands=['insta'])
 def handle_ytdl(message: Message):
-    insta_command(message, bot)
+    insta_command(message, bot, db)
 
 @bot.message_handler(commands=['song'])
 def song_download(message: Message):
-    song_downloader(bot, message)
+    song_downloader(bot, message, db)
 
 @bot.message_handler(commands=['help'])
 def help(message: Message):

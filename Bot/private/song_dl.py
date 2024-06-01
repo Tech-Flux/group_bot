@@ -5,9 +5,16 @@ import telebot
 
 progress_messages = {}
 
-def song_downloader(bot: telebot.TeleBot, message: Message):
+def song_downloader(bot: telebot.TeleBot, message: Message, db):
     if message.chat.type != 'private':
         bot.reply_to(message, "This command can only be used in private chats.")
+        return
+
+    user_id = message.from_user.id
+    is_premium = db["premium"].find_one({"user_id": user_id})
+
+    if not is_premium:
+        bot.reply_to(message, "You are not premium user!\nUse /addme to be added to premium List")
         return
 
     song_name = message.text.split(' ', 1)[1] if len(message.text.split()) > 1 else None

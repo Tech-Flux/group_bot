@@ -1,7 +1,7 @@
 commands = """
 Hey there! My name is Halima - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
 
-Join my news channel (http://t.me/teampoisonmods) to get information on all the latest updates.
+Join my news channel https://t.me/realhalima to get information on all the latest updates.
 
 Use the /privacy command to view the privacy policy, and interact with your data.
 """
@@ -12,9 +12,9 @@ admins = """
 - /promote <reply/username/mention/userid>: Promote a user.
 - /demote <reply/username/mention/userid>: Demote a user.
 - /adminlist: List the admins in the current chat.
-- /admincache: Update the admin cache, to take into account new admins/admin permissions.
-- /anonadmin <yes/no/on/off>: Allow anonymous admins to use all commands without checking their permissions. Not recommended.
-- /adminerror <yes/no/on/off>: Send error messages when normal users use admin commands. Default: on.
+- /kick <reply>
+- /mute <reply>
+
 """
 
 starter_help = """
@@ -79,13 +79,17 @@ help_database = """
 Interact with database
 - /myinfo
 - /database
+- /addme -This registers premium by sending request to bot owner
+- /addprem <user_id>
+- /delprem <user_id>
+- /premusers
 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔
 """
 Quran_help = """
 Read Some Qur'an
 - /quran <chapter:verse>
 - /chapter <number>
-- /hadith <someone>
+- /hadith 
 𝑰𝒔𝒍𝒂𝒎 𝑯𝒆𝒓𝒆
 """
 owner_commands = """
