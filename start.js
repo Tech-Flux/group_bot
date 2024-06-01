@@ -96,6 +96,6 @@ server.listen(8080, () => {
 
     /**uncomment to auto open webpage of the bot in your machine */
 
-  //  open('http://localhost:8080'); 
+   open('http://localhost:8080'); 
 });
 
