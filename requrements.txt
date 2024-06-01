@@ -1,6 +1,6 @@
 telebot
 pymongo
 python-dotenv
-openai
+openai=0.28
 yt_dlp
 googletrans
