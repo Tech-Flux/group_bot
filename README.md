@@ -9,7 +9,7 @@
 
 
 <p align="center">
-        <img src="https://i.imgur.com/cRkAWNS.jpeg" alt="01" width="550" height="500" style="border-radius: 50%";/>
+        <img src="https://i.imgur.com/cRkAWNS.jpeg" alt="01" width="650" height="500" style="border-radius: 50%";/>
     </a>
 </p>
 
