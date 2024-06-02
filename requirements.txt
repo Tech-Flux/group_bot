@@ -8,3 +8,4 @@ transformers
 colorama
 Image
 bs4
+Pillow
