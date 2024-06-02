@@ -16,7 +16,7 @@ def send_addme_request(bot: telebot.TeleBot, message: Message, authorized_user_i
 
     # Message to be sent to the authorized user
     addme_message = (
-        f"User Requesting Addition:\n"
+        f"User premium Request\n"
         f"User ID: {user_id}\n"
         f"Name: {user_full_name}\n"
         f"Profile: {profile_link}"

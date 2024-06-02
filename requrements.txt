@@ -4,3 +4,5 @@ python-dotenv
 openai==0.28
 yt_dlp
 googletrans
+transformers
+torch

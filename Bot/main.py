@@ -42,6 +42,7 @@ from private.addme import addme_command
 from private.broadcast import  setup_broadcast_command
 from private.weather import setup_weather_command, joke_command, riddle_command, quote_command
 from private.database import users_list, user_info_cmd
+from private.chatai import setup_chat_command
 from private.commands import admins, help_rules, help_notes, owner_commands, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database, Quran_help
 load_dotenv()
 logging.basicConfig(filename="bot.log",
@@ -101,6 +102,7 @@ riddle_command(bot)
 quote_command(bot)
 addme_command(bot, authorized_user_id)
 setup_broadcast_command(bot, db, authorized_user_id)
+setup_chat_command(bot)
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
