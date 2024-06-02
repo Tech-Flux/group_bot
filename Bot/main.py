@@ -31,7 +31,6 @@ from private.ytdlp import ytdl_command
 from private.insta import insta_command
 from private.help import send_help
 from private.openai import setup_ai
-from private.compress_image import setup_compress
 from private.song_dl import song_downloader
 from private.quran import setup_quran_command, setup_hadith_command
 from private.entire_chapter import setup_quran_chapter
@@ -203,7 +202,6 @@ PRIVATE CHATS HANDLERS HERE
 def handle_start(message: Message):
     start_command(message, db, bot)
 
-# Register the handler for the callback queries related to registration
 @bot.callback_query_handler(func=lambda call: call.data.startswith('register'))
 def handle_register_query(call):
     handle_register_callback(call, db, bot)
