@@ -4,12 +4,12 @@
 
 
 <p align="center">
-  <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Time+New+Roman&color=cyan&size=25&center=true&vCenter=true&width=600&height=100&lines=Assalamu+O+Alaikum+Warahmatullah..&hearts;++;This+is+Halima-Bot,;Powered By+MongoDB..<3"></a>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Time+New+Roman&color=cyan&size=25&center=true&vCenter=true&width=600&height=100&lines=Assalamu+O+Alaikum+Warahmatullah..&hearts;++;This+is+Halima-Bot,;Powered By+MongoDB..<3"></a>
 </p>
 
 
 <p align="center">
-        <img src="https://i.imgur.com/cRkAWNS.jpeg" alt="01" width="500" height="500" style="border-radius: 50%";/>
+        <img src="https://i.imgur.com/cRkAWNS.jpeg" alt="01" width="550" height="500" style="border-radius: 50%";/>
     </a>
 </p>
 
