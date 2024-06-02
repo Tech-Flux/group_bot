@@ -6,5 +6,5 @@ yt_dlp
 googletrans
 transformers
 colorama
-PIL
+Image
 bs4
