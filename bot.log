@@ -1,4 +1,52 @@
-2024-06-01 03:30:53 INFO - {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "find", "topologyDescription": "<TopologyDescription id: 665ace2b83f0e60d19a31978, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-ykxdvvh-shard-00-00.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-ykxdvvh-shard-00-01.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-ykxdvvh-shard-00-02.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665ace2b83f0e60d19a31978"}, "remainingTimeMS": 29}
-2024-06-01 03:44:20 INFO - {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "find", "topologyDescription": "<TopologyDescription id: 665ad1525f5d3597d2ff7aa4, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-ykxdvvh-shard-00-00.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AttributeError('module service_identity has no attribute SICertificateError')>, <ServerDescription ('ac-ykxdvvh-shard-00-01.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AttributeError('module service_identity has no attribute SICertificateError')>, <ServerDescription ('ac-ykxdvvh-shard-00-02.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665ad1525f5d3597d2ff7aa4"}, "remainingTimeMS": 29}
-2024-06-01 08:30:22 INFO - {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "find", "topologyDescription": "<TopologyDescription id: 665b145c064ab0e59cf3b191, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-ykxdvvh-shard-00-00.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-ykxdvvh-shard-00-01.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-ykxdvvh-shard-00-02.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665b145c064ab0e59cf3b191"}, "remainingTimeMS": 29}
-2024-06-01 08:30:22 INFO - {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "find", "topologyDescription": "<TopologyDescription id: 665b145c064ab0e59cf3b191, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-ykxdvvh-shard-00-00.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-ykxdvvh-shard-00-01.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-ykxdvvh-shard-00-02.cejdegd.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665b145c064ab0e59cf3b191"}, "remainingTimeMS": 29}
+2024-06-02 03:40:59 ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: wrong remote file identifier specified: Wrong character in the string
+2024-06-02 03:40:59 ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/__init__.py", line 1215, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/util.py", line 150, in raise_exceptions
+    raise self.exception_info
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/util.py", line 93, in run
+    task(*args, **kwargs)
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/__init__.py", line 8449, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdul/Desktop/group_bot/Bot/private/textpro.py", line 69, in handle_textstyle_command
+    bot.send_photo(message.chat.id, img_url)
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/__init__.py", line 2211, in send_photo
+    apihelper.send_photo(
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/apihelper.py", line 516, in send_photo
+    return _make_request(token, method_url, params=payload, files=files, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: wrong remote file identifier specified: Wrong character in the string
+
+2024-06-02 03:42:01 ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: wrong remote file identifier specified: Wrong character in the string
+2024-06-02 03:42:01 ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/__init__.py", line 1215, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/util.py", line 150, in raise_exceptions
+    raise self.exception_info
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/util.py", line 93, in run
+    task(*args, **kwargs)
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/__init__.py", line 8449, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdul/Desktop/group_bot/Bot/private/textpro.py", line 69, in handle_textstyle_command
+    bot.send_photo(message.chat.id, img_url)
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/__init__.py", line 2211, in send_photo
+    apihelper.send_photo(
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/apihelper.py", line 516, in send_photo
+    return _make_request(token, method_url, params=payload, files=files, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdul/.local/lib/python3.11/site-packages/telebot/apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: wrong remote file identifier specified: Wrong character in the string
+

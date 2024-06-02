@@ -39,11 +39,13 @@ from private.searchai import setup_google_search
 from private.botlog import setup_clearlogs_command
 from private.premium import premium_commands
 from private.addme import addme_command
+from private.image import setup_image_commands
+from private.donateme import setup_donate_command
 from private.broadcast import  setup_broadcast_command
 from private.weather import setup_weather_command, joke_command, riddle_command, quote_command
 from private.database import users_list, user_info_cmd
-from private.chatai import setup_chat_command
-from private.commands import admins, help_rules, help_notes, owner_commands, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database, Quran_help
+#from private.chatai import setup_chat_command #uncomment this And pip install torch else wont  work
+from private.commands import admins, help_rules, weather_cmd, help_fun, help_notes, ppremium_commands, help_image, owner_commands, help_downloads, help_welcome_goodbye, help_locks, help_ai, help_database, Quran_help
 load_dotenv()
 logging.basicConfig(filename="bot.log",
                     level=logging.INFO,
@@ -100,9 +102,11 @@ setup_weather_command(bot)
 joke_command(bot)
 riddle_command(bot)
 quote_command(bot)
+setup_donate_command(bot)
+setup_image_commands(bot)
 addme_command(bot, authorized_user_id)
 setup_broadcast_command(bot, db, authorized_user_id)
-setup_chat_command(bot)
+#setup_chat_command(bot) uncomment and pip install torch
 
 @bot.message_handler(commands=['warn'])
 def handle_warn(message: telebot.types.Message):
@@ -304,6 +308,38 @@ def handle_query(call):
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(user_id, owner_commands)
 
+    if call.data == 'button_com':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "commands")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_database)
+        bot.send_message(user_id, Quran_help)
+        bot.send_message(user_id, help_ai)
+
+    if call.data == 'button_prem':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Premium commands")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, ppremium_commands)
+
+    if call.data == 'button_we':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Weather commands")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, weather_cmd)
+
+    if call.data == 'button_img':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "Images commands")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_image)
+    
+    if call.data == 'button_fun':
+        user_id = call.from_user.id
+        bot.answer_callback_query(call.id, "fun commands")
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        bot.send_message(user_id, help_fun)
+    
 
 setup_locks(bot, db)
 

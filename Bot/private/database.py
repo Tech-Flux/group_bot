@@ -54,14 +54,7 @@ def user_info_cmd(bot: telebot.TeleBot, db):
                 bot.reply_to(message, "You are not registered in the bot database.")
                 return
 
-            user_warns = db["user_warns"].find({"user_id": user_id})
-            warns_info = {}
-            for warn in user_warns:
-                group_id = warn.get("group_id")
-                if group_id:
-                    if group_id not in warns_info:
-                        warns_info[group_id] = 0
-                    warns_info[group_id] += 1
+          
 
             # Retrieve locks from db["locks"]
             locks_info = {}

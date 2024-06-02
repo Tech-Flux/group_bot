@@ -12,24 +12,24 @@ def send_help(message: Message, bot):
         
     markup = InlineKeyboardMarkup()
     buttons = [
-        InlineKeyboardButton("Admin", callback_data="button_admins"),
-        InlineKeyboardButton("Notes", callback_data="button_notes"),
-        InlineKeyboardButton("Rules", callback_data="button_rules"),
-        InlineKeyboardButton("Greetings", callback_data="button_greetings"),
-        InlineKeyboardButton("Locks", callback_data="button_locks"),
-        InlineKeyboardButton("Downloader", callback_data="button_downloads"),
-        InlineKeyboardButton("Ai", callback_data="button_ai"),
-        InlineKeyboardButton("Database", callback_data="button_db"),
-        InlineKeyboardButton("Qur'an", callback_data="button_isl"),
-        InlineKeyboardButton("Owner", callback_data="button_owner"),
-        InlineKeyboardButton("Fun", callback_data="button_fun"),
-        InlineKeyboardButton("Weather", callback_data="button_we"),
-        InlineKeyboardButton("Premium", callback_data="button_prem"),
-        InlineKeyboardButton("Commands", callback_data="button_com"),
-        InlineKeyboardButton("Fifteenth Option", callback_data="fifteenth_option"),
-        InlineKeyboardButton("Sixteenth Option", callback_data="sixteenth_option"),
-        InlineKeyboardButton("Seventeenth Option", callback_data="seventeenth_option"),
-        InlineKeyboardButton("Eighteenth Option", callback_data="eighteenth_option")
+         InlineKeyboardButton("Admin 👑", callback_data="button_admins"),
+    InlineKeyboardButton("Notes 📝", callback_data="button_notes"),
+    InlineKeyboardButton("Rules 📜", callback_data="button_rules"),
+    InlineKeyboardButton("Greetings 🎉", callback_data="button_greetings"),
+    InlineKeyboardButton("Locks 🔒", callback_data="button_locks"),
+    InlineKeyboardButton("Download 📥", callback_data="button_downloads"),
+    InlineKeyboardButton("AI 🤖", callback_data="button_ai"),
+    InlineKeyboardButton("Database 💾", callback_data="button_db"),
+    InlineKeyboardButton("Qur'an 🕌", callback_data="button_isl"),
+    InlineKeyboardButton("Owner 👤", callback_data="button_owner"),
+    InlineKeyboardButton("Fun 😄", callback_data="button_fun"),
+    InlineKeyboardButton("Weather 🌦️", callback_data="button_we"),
+    InlineKeyboardButton("Premium 💎", callback_data="button_prem"),
+    InlineKeyboardButton("Commands ❓", callback_data="button_com"),
+    InlineKeyboardButton("Image AI 🖼️", callback_data="button_img"),
+    InlineKeyboardButton("Add Me 🤝", url=f"https://t.me/{bot.get_me().username}?startgroup=true")
+
+
     ]
 
     for i in range(0, len(buttons), 3):

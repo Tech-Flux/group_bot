@@ -12,7 +12,7 @@ def start_command(message: Message, db, bot):
         user_registered = check_registration(user_id, db)
         if user_registered:
 
-             bot.send_photo(chat_id=user_id, photo=open(photo_path, 'rb'), caption=commands)
+             bot.send_photo(chat_id=user_id, photo=open(photo_path, 'rb'), caption=commands, parse_mode='Markdown')
         else:
             keyboard = InlineKeyboardMarkup()
             yes_button = InlineKeyboardButton("Yes", callback_data="register_yes")
