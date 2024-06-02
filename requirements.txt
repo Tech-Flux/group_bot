@@ -9,3 +9,4 @@ colorama
 Image
 bs4
 Pillow
+https://i.imgur.com/joxBXdZ.jpeg
