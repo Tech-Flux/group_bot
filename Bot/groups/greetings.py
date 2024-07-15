@@ -2,7 +2,7 @@ from telebot.types import Message
 from .admin import is_user_admin, is_bot_admin
 
 def set_welcome(bot, db):
-    @bot.message_handler(commands=['setwelcome'])
+    @bot.message_handler(commands=['welcome'])
     def set_welcome_message(message: Message):
         if message.chat.type == 'private':
             bot.reply_to(message, "This command can only be used in groups.")
@@ -18,19 +18,31 @@ def set_welcome(bot, db):
                 return
 
             group_id = message.chat.id
-            welcome_message = message.text.split(' ', 1)[1] if len(message.text.split()) > 1 else None
-
-            if not welcome_message:
-                bot.reply_to(message, f"Use as follows\nExample: /setwelcome {{name}} Welcome to {message.chat.title}!")
+            command_parts = message.text.split(' ', 1)
+            
+            if len(command_parts) == 1:
+                bot.reply_to(message, "Usage: /welcome [on/off] [message]\nExample: /welcome on {name} Welcome to {group}!")
                 return
 
-            db.messages.update_one({"_id": group_id}, {"$set": {"welcome_message": welcome_message}}, upsert=True)
-            bot.reply_to(message, "Welcome message set successfully!")
+            action = command_parts[1].split(' ')[0].lower()
+
+            if action == 'on':
+                welcome_message = ' '.join(command_parts[1].split(' ')[1:])
+                if not welcome_message:
+                    bot.reply_to(message, f"Usage: /welcome on {{name}} Welcome to {message.chat.title}!")
+                    return
+                db.messages.update_one({"_id": group_id}, {"$set": {"welcome_message": welcome_message, "welcome_enabled": True}}, upsert=True)
+                bot.reply_to(message, "Welcome message enabled and set successfully!")
+            elif action == 'off':
+                db.messages.update_one({"_id": group_id}, {"$set": {"welcome_enabled": False}}, upsert=True)
+                bot.reply_to(message, "Welcome message disabled successfully!")
+            else:
+                bot.reply_to(message, "Invalid action. Use 'on' to enable and 'off' to disable.")
         except Exception as e:
             bot.reply_to(message, f"An error occurred: {e}")
 
 def set_goodbye(bot, db):
-    @bot.message_handler(commands=['setgoodbye'])
+    @bot.message_handler(commands=['goodbye'])
     def set_goodbye_message(message: Message):
         if message.chat.type == 'private':
             bot.reply_to(message, "This command can only be used in groups.")
@@ -46,14 +58,26 @@ def set_goodbye(bot, db):
                 return
 
             group_id = message.chat.id
-            goodbye_message = message.text.split(' ', 1)[1] if len(message.text.split()) > 1 else None
-
-            if not goodbye_message:
-                bot.reply_to(message, f"Use as follows\nExample: /setgoodbye Goodbye {{name}}. Hope to see you again in {message.chat.title}!")
+            command_parts = message.text.split(' ', 1)
+            
+            if len(command_parts) == 1:
+                bot.reply_to(message, "Usage: /goodbye [on/off] [message]\nExample: /goodbye on Goodbye {name}. Hope to see you again in {group}!")
                 return
 
-            db.messages.update_one({"_id": group_id}, {"$set": {"goodbye_message": goodbye_message}}, upsert=True)
-            bot.reply_to(message, "Goodbye message set successfully!")
+            action = command_parts[1].split(' ')[0].lower()
+
+            if action == 'on':
+                goodbye_message = ' '.join(command_parts[1].split(' ')[1:])
+                if not goodbye_message:
+                    bot.reply_to(message, f"Usage: /goodbye on Goodbye {{name}}. Hope to see you again in {message.chat.title}!")
+                    return
+                db.messages.update_one({"_id": group_id}, {"$set": {"goodbye_message": goodbye_message, "goodbye_enabled": True}}, upsert=True)
+                bot.reply_to(message, "Goodbye message enabled and set successfully!")
+            elif action == 'off':
+                db.messages.update_one({"_id": group_id}, {"$set": {"goodbye_enabled": False}}, upsert=True)
+                bot.reply_to(message, "Goodbye message disabled successfully!")
+            else:
+                bot.reply_to(message, "Invalid action. Use 'on' to enable and 'off' to disable.")
         except Exception as e:
             bot.reply_to(message, f"An error occurred: {e}")
 
@@ -66,7 +90,7 @@ def welcome_goodbye_handler(bot, db):
         try:
             group_id = message.chat.id
             group_data = db.messages.find_one({"_id": group_id})
-            if group_data and "welcome_message" in group_data:
+            if group_data and group_data.get("welcome_enabled", False) and "welcome_message" in group_data:
                 for new_member in message.new_chat_members:
                     welcome_text = group_data["welcome_message"].replace('{name}', f"[{new_member.first_name}](tg://user?id={new_member.id})").replace('{group}', message.chat.title)
                     bot.send_message(
@@ -84,7 +108,7 @@ def welcome_goodbye_handler(bot, db):
         try:
             group_id = message.chat.id
             group_data = db.messages.find_one({"_id": group_id})
-            if group_data and "goodbye_message" in group_data:
+            if group_data and group_data.get("goodbye_enabled", False) and "goodbye_message" in group_data:
                 goodbye_text = group_data["goodbye_message"].replace('{name}', f"[{message.left_chat_member.first_name}](tg://user?id={message.left_chat_member.id})").replace('{group}', message.chat.title)
                 bot.send_message(
                     message.chat.id, 
